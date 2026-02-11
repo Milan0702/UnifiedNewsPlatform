@@ -1,0 +1,52 @@
+# .gitignore
+
+# C# / .NET
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+.vscode/
+.idea/
+
+# Node.js / Frontend
+node_modules/
+dist/
+build/
+.npm/
+*.log
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Java / Maven
+target/
+*.iml
+.mvn/
+
+# Logs & debug artifacts
+logs/
+log/
+*.tmp
+*.swp
+debug_logs.txt
+news_debug_logs.txt
+news_logs.txt
+processor_logs.txt
+
+# IDE / tooling
+.cursor/
+.classpath
+.project
+.settings/
+
+# Docker / compose extras
+*.pid
+docker-compose.override.yml

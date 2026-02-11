@@ -1,0 +1,6 @@
+@ContentDeliveryService_HostAddress = http://localhost:5220
+
+GET {{ContentDeliveryService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

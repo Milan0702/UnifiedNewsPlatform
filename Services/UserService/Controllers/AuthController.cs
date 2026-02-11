@@ -1,0 +1,50 @@
+using Microsoft.AspNetCore.Mvc;
+using UserService.DTOs;
+using UserService.Models;
+using UserService.Services;
+
+namespace UserService.Controllers;
+
+[ApiController]
+[Route("api/auth")]
+public class AuthController : ControllerBase
+{
+    private readonly IAuthService _authService;
+
+    public AuthController(IAuthService authService)
+    {
+        _authService = authService;
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register(RegisterDto dto)
+    {
+        try
+        {
+            var user = new User
+            {
+                Email = dto.Email,
+                FullName = dto.FullName
+            };
+
+            var token = await _authService.RegisterAsync(user, dto.Password);
+            return Ok(new { Token = token });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginDto dto)
+    {
+        var token = await _authService.LoginAsync(dto.Email, dto.Password);
+        if (token == null)
+        {
+            return Unauthorized(new { Message = "Invalid credentials" });
+        }
+
+        return Ok(new { Token = token });
+    }
+}
